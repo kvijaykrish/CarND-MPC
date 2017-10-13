@@ -24,14 +24,14 @@ The equations of the kinematic vehicle model used here are:
 5. cte[t+1] = f(x[t]) - y[t] + v[t] * sin(epsi[t]) * dt
 6. epsi[t+1] = psi[t] - psides[t] + v[t] * delta[t] / Lf * dt
    
-x and y are the position of the vehicle 
-'psi' is the vehicle's orientation angle
-v is the scalar velocity
-'cte' is the cross-track error (or rather an approximation to it), which is the orthogonal distance between the reference trajectory and the vehicle position
-'epsi' is the error between the vehicle's actual orientation angle psi and the orientation angle 'psides'
+x and y are the position of the vehicle,  
+'psi' is the vehicle's orientation angle, 
+v is the scalar velocity, 
+'cte' is the cross-track error (or rather an approximation to it), which is the orthogonal distance between the reference trajectory and the vehicle position, 
+'epsi' is the error between the vehicle's actual orientation angle psi and the orientation angle 'psides', 
 'dt' is the length of one time step in the model, 
-'delta' is the input steering angle
-'a' is the input acceleration
+'delta' is the input steering angle, 
+'a' is the input acceleration, 
 'Lf' is a constant describing the distance between the vehicle's center of gravity and its front wheels.
 
 The proportinal weights used for the cost function are:
@@ -83,5 +83,6 @@ This is implemented in lines 105 to 109 in main.cpp
 ## Simulation Results
 
 The vehicle successfully drives multiple laps around the track. The prediction and way points to take a turn in simulator is shown below:
+
 ![jpg](./Results/MPC.jpg)
 
