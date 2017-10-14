@@ -43,19 +43,36 @@ V : 1000
  
 Actuator use cost, i.e. minimize the use of actuators for a smoother drive
 DELTA: 500000
-A : 1000
+A : 1 
  
 Actuator change rate cost, i.e. minimize the change in actuator use for a smoother drive
 DELTA_DIFF : 40000
 A_DIFF : 1
- 
+
+Various weights were tried out for the cost function are capture in lines 55 to 85 of MPC.cpp
+
 ### Timestep Length and Elapsed Duration (N & dt)
 
-Number of timesteps N = 10
-Duration of one timestep dt = 0.5
+Initially N was set to 10 and dt was set to 0.1. This give finer resolution. However the distance predicted N * dt = 1 which is very small and may not be appropriate for higher speed.
+Prediction when N=10, dt = 0.1
 
-When N is inceased it required more processing time in the solver. Hence N=10 was choosen
-When the timestep is very small say 0.1 the totat distace the way points were calulated was ver small and hence optimal timestep of dt = 0.5 was choosen
+![jpg](./Results/MPC_dt01.jpg)
+
+Then dt was tried with 0.2 and 0.5 as shown in picture:
+
+Prediction when N=10, dt = 0.2
+
+![jpg](./Results/MPC_dt02.jpg)
+
+Prediction when N=10, dt = 0.5: When dt was high 0.5 the car went off the curb sometimes due to lowere resolution.
+
+![jpg](./Results/MPC.jpg)
+
+Later Number of timesteps N was set as 20 the duration of one timestep dt = 0.3
+When N is inceased further it required more processing time in the solver. 
+When the timestep is very small say 0.1 the totat distace the way points were calulated was very small and hence optimal timestep of dt = 0.3 was choosen
+Prediction when N=20, dt = 0.3
+![jpg](./Results/MPC_N20_dt03.jpg)
 
 ### Polynomial Fitting and MPC Preprocessing
 
@@ -82,7 +99,7 @@ This is implemented in lines 105 to 109 in main.cpp
 
 ## Simulation Results
 
-The vehicle successfully drives multiple laps around the track. The prediction and way points to take a turn in simulator is shown below:
+The vehicle successfully drives multiple laps around the track without going out on the curb. The prediction and way points to take a turn in simulator is shown below:
 
-![jpg](./Results/MPC.jpg)
+![jpg](./Results/MPC_N20_dt03_final.jpg)
 
